@@ -1,7 +1,7 @@
 {
-  "name": "jeep-sqlite",
-  "version": "2.8.0",
-  "description": "Browser SQLite Stencil Component",
+  "name": "@arcade-cabinet/jeep-sqlite",
+  "version": "2.8.0-arcade.1",
+  "description": "Private current-upstream build of jeep-sqlite 2.8.0 for Arcade Cabinet browser SQLite consumers",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
   "es2015": "dist/esm/index.mjs",
@@ -15,29 +15,29 @@
     "loader/"
   ],
   "scripts": {
-    "copy:sql:wasm": "copyfiles -u 3 node_modules/sql.js/dist/sql-wasm.wasm www/assets",
+    "copy:sql:wasm": "node scripts/copy-wasm.mjs",
     "build": "npm run copy:sql:wasm && stencil build --docs",
     "start": "npm run copy:sql:wasm && stencil build --dev --watch --serve",
-    "test": "stencil test --spec --e2e",
-    "test.watch": "stencil test --spec --e2e --watchAll",
-    "generate": "stencil generate"
+    "test": "vitest run",
+    "test:unit": "vitest run",
+    "test.watch": "vitest",
+    "generate": "stencil generate",
+    "verify:currency": "npm outdated --omit=dev",
+    "verify:security": "npm audit --omit=dev --audit-level=high"
   },
   "dependencies": {
-    "@stencil/core": "^4.20.0",
-    "browser-fs-access": "^0.35.0",
-    "jszip": "^3.10.1",
-    "localforage": "^1.10.0",
-    "sql.js": "^1.11.0"
+    "@stencil/core": "4.43.5",
+    "browser-fs-access": "0.38.0",
+    "jszip": "3.10.1",
+    "localforage": "1.10.0",
+    "sql.js": "1.14.1"
   },
   "devDependencies": {
-    "@types/jest": "^27.5.2",
-    "@types/node": "^20.12.7",
-    "@types/sql.js": "^1.4.9",
-    "copyfiles": "^2.4.1",
-    "jest": "^27.5.1",
-    "jest-cli": "^27.5.1",
-    "puppeteer": "^23.1.0",
-    "rollup-plugin-node-polyfills": "^0.2.1"
+    "@types/node": "26.1.1",
+    "@types/sql.js": "1.4.11",
+    "@stencil/vitest": "1.14.0",
+    "rollup-plugin-node-polyfills": "0.2.1",
+    "vitest": "4.1.10"
   },
   "keywords": [
     "SQLite",
@@ -49,9 +49,13 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jepiqueau/jeep-sqlite.git"
+    "url": "https://github.com/jbcom/jeep-sqlite.git"
   },
   "bugs": {
     "url": "https://github.com/jepiqueau/jeep-sqlite.git/issues"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://registry.npmjs.org/"
   }
 }

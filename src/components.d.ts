@@ -12,6 +12,7 @@ export namespace Components {
         "addUpgradeStatement": (options: SQLiteUpgradeOptions) => Promise<void>;
         /**
           * AutoSave
+          * @default false
          */
         "autoSave": boolean;
         "beginTransaction": (options: SQLiteOptions) => Promise<SQLiteChanges>;
@@ -64,6 +65,7 @@ export namespace Components {
         "setSyncDate": (options: SQLiteSyncDateOptions) => Promise<void>;
         /**
           * in use with TypeOrm
+          * @default false
          */
         "typeOrm": boolean;
         /**
@@ -106,6 +108,7 @@ declare namespace LocalJSX {
     interface JeepSqlite {
         /**
           * AutoSave
+          * @default false
          */
         "autoSave"?: boolean;
         /**
@@ -127,6 +130,7 @@ declare namespace LocalJSX {
         "saveText"?: string;
         /**
           * in use with TypeOrm
+          * @default false
          */
         "typeOrm"?: boolean;
         /**
@@ -134,15 +138,25 @@ declare namespace LocalJSX {
          */
         "wasmPath"?: string;
     }
+
+    interface JeepSqliteAttributes {
+        "autoSave": boolean;
+        "typeOrm": boolean;
+        "wasmPath": string;
+        "pickText": string;
+        "saveText": string;
+        "buttonOptions": string;
+    }
+
     interface IntrinsicElements {
-        "jeep-sqlite": JeepSqlite;
+        "jeep-sqlite": Omit<JeepSqlite, keyof JeepSqliteAttributes> & { [K in keyof JeepSqlite & keyof JeepSqliteAttributes]?: JeepSqlite[K] } & { [K in keyof JeepSqlite & keyof JeepSqliteAttributes as `attr:${K}`]?: JeepSqliteAttributes[K] } & { [K in keyof JeepSqlite & keyof JeepSqliteAttributes as `prop:${K}`]?: JeepSqlite[K] };
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "jeep-sqlite": LocalJSX.JeepSqlite & JSXBase.HTMLAttributes<HTMLJeepSqliteElement>;
+            "jeep-sqlite": LocalJSX.IntrinsicElements["jeep-sqlite"] & JSXBase.HTMLAttributes<HTMLJeepSqliteElement>;
         }
     }
 }

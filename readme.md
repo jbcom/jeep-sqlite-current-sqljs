@@ -2,6 +2,20 @@
 
 # jeep-sqlite
 
+## Arcade Cabinet current-upstream build
+
+`@arcade-cabinet/jeep-sqlite@2.8.0-arcade.1` is built from the exact public
+`jeep-sqlite@2.8.0` tag (`3f3c8f2`) with its runtime foundations advanced to
+their current stable releases. In particular, the generated Stencil loader and
+the shipped WASM are built together from `sql.js@1.14.1`; substituting that
+WASM underneath the public package's older prebuilt loader is ABI-incompatible.
+
+This private build exists only to close that upstream release gap. It preserves
+the public component API and source attribution, and it must be retired or
+rebased when a newer public `jeep-sqlite` release provides equivalent current
+dependency support. Release proof includes the upstream test/build gates plus a
+real `@capacitor-community/sqlite` browser save/reload consumer.
+
 `jeep-sqlite`is a Stencil component to create SQLite database and query it in the browser. The entire database is stored in an `IndexedDB` store named `jeepSQLiteStore` in a table `databases`. Multiple databases can be stored on this table.
 
 `jeep-sqlite` is based on `sql.js`for SQLite queries and `localforage`for database storage in IndexedDB.
