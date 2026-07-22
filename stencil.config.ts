@@ -1,11 +1,23 @@
 import { Config } from '@stencil/core';
 import nodePolyfills from 'rollup-plugin-node-polyfills';
 
+const polyfills = nodePolyfills();
+
 export const config: Config = {
   namespace: 'jeep-sqlite',
   rollupPlugins: {
+    before: [
+      {
+        name: 'node-polyfills-resolver',
+        resolveId: polyfills.resolveId,
+        load: polyfills.load,
+      },
+    ],
     after: [
-      nodePolyfills(),
+      {
+        name: 'node-polyfills-injector',
+        transform: polyfills.transform,
+      },
     ]
   },
   extras: {
