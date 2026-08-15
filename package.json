@@ -35,7 +35,7 @@
     "sql.js": "1.14.1"
   },
   "devDependencies": {
-    "@types/node": "26.1.1",
+    "@types/node": "26.2.0",
     "@types/sql.js": "1.4.11",
     "@stencil/vitest": "1.14.0",
     "rollup-plugin-node-polyfills": "0.2.1",
