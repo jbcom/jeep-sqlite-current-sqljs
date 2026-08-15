@@ -28,7 +28,7 @@
     "verify:security": "npm audit --omit=dev --audit-level=high"
   },
   "dependencies": {
-    "@stencil/core": "4.43.5",
+    "@stencil/core": "4.44.0",
     "browser-fs-access": "0.38.0",
     "jszip": "3.10.1",
     "localforage": "1.10.0",
