@@ -15,8 +15,9 @@ concurrency:
 
 jobs:
   deploy:
-    # First-release setup is intentionally held until publication is authorized.
-    if: false
+    if: >-
+      vars.RELEASE_AUTOMATION_ENABLED == 'true' && github.event.workflow_run.name == 'CI' &&
+      github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-24.04
     permissions:
       contents: read
@@ -44,7 +45,9 @@ jobs:
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
 
   publish:
-    if: false
+    if: >-
+      vars.RELEASE_AUTOMATION_ENABLED == 'true' && github.event.workflow_run.name == 'Release' &&
+      github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-24.04
     permissions:
       contents: read

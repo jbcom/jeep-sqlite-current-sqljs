@@ -14,8 +14,7 @@ concurrency:
 
 jobs:
   release-please:
-    # First-release setup is intentionally held until publication is authorized.
-    if: false
+    if: vars.RELEASE_AUTOMATION_ENABLED == 'true'
     runs-on: ubuntu-24.04
     permissions:
       contents: write

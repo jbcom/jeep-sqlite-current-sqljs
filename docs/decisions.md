@@ -180,11 +180,17 @@ OS-specific path or process behavior, so a Windows job would test the runner, no
 **Why.** Trusted publishing is configured per package on npmjs, and the package must exist first.
 No token is stored in the repository or its secrets.
 
-## D14. First-release automation remains held
+## D14. Release automation resumes after the approved first publication
 
-**Decision.** Release, CD and Automerge jobs are guarded off until the first publication is
-authorized. Keep the release bootstrap commit unchanged from the initial setup.
+**Decision.** The first-release hold is fulfilled by the exact baseline `v2.9.0` tag at
+`b036dce0039b0d18f10664a24e6bbc82789f5721`, its GitHub release, and its npm publication. Restore
+Release, CD and Automerge as guarded jobs. Every job also requires the repository variable
+`RELEASE_AUTOMATION_ENABLED` to equal `true`; source changes alone do not activate automation.
 
-**Why.** GitHub cannot disable a workflow before it exists on the default branch. Job guards
-prevent imported history from creating releases or publishing while the initial pull request
-lands; the registered workflows can then be disabled through GitHub as well.
+**Why.** The initial `if: false` guards prevented imported history from creating releases or
+publishing before the first package existed. The owner subsequently approved trusted publishing and
+required npm 2FA for this package with the other public packages. That approval supersedes the
+temporary first-stage source holds, while the repository variable keeps activation a deliberate
+post-merge step. Release and CD retain their original trusted-event and successful-conclusion
+conditions, and Automerge retains its same-repository, branch and generated-actor restrictions.
+Release Please branches must also be authored by `github-actions[bot]`.
