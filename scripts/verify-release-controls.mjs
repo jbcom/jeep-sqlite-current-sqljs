@@ -26,18 +26,44 @@ forbidText(cd, 'if: false', 'CD workflow');
 
 const automerge = read('.github/workflows/automerge.yml');
 for (const expected of [
+  'types: [opened, synchronize, reopened, ready_for_review, labeled]',
   "vars.RELEASE_AUTOMATION_ENABLED == 'true' &&",
   'github.event.pull_request.draft == false',
   "github.event.pull_request.base.ref == 'main'",
   'github.event.pull_request.head.repo.full_name == github.repository',
-  "github.event.pull_request.user.login == 'github-actions[bot]'",
-  "startsWith(github.event.pull_request.head.ref, 'release-please--')",
+  "github.event.pull_request.user.login == 'jbdevprimary'",
+  "github.event.pull_request.head.ref == 'release-please--branches--main--components--jeep-sqlite-current-sqljs'",
+  "startsWith(github.event.pull_request.title, 'chore(main): release ')",
+  "contains(github.event.pull_request.labels.*.name, 'autorelease: pending')",
+  "contains(github.event.pull_request.body, 'This PR was generated with [Release Please]')",
   "github.event.pull_request.user.login == 'dependabot[bot]'",
 ]) {
   requireText(automerge, expected, 'Automerge workflow');
 }
 forbidText(automerge, 'if: false', 'Automerge workflow');
 forbidText(automerge, '\n      false &&', 'Automerge workflow');
+
+const permitsReleasePlease = ({ author, sameRepository, branch, title, labels, body }) =>
+  author === 'jbdevprimary' &&
+  sameRepository &&
+  branch === 'release-please--branches--main--components--jeep-sqlite-current-sqljs' &&
+  title.startsWith('chore(main): release ') &&
+  labels.includes('autorelease: pending') &&
+  body.includes('This PR was generated with [Release Please]');
+const trustedReleasePlease = {
+  author: 'jbdevprimary',
+  sameRepository: true,
+  branch: 'release-please--branches--main--components--jeep-sqlite-current-sqljs',
+  title: 'chore(main): release 2.9.1',
+  labels: ['autorelease: pending'],
+  body: ':robot: This PR was generated with [Release Please]',
+};
+if (!permitsReleasePlease(trustedReleasePlease)) {
+  throw new Error('Automerge workflow must admit the trusted Release Please identity');
+}
+if (permitsReleasePlease({ ...trustedReleasePlease, author: 'untrusted-contributor' })) {
+  throw new Error('Automerge workflow must reject an untrusted Release Please actor');
+}
 
 const ruleset = read('scripts/apply-branch-ruleset.mjs');
 requireText(ruleset, 'rulesets?includes_parents=false', 'Ruleset script');
