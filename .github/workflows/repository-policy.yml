@@ -16,7 +16,7 @@ jobs:
       - name: Keep external forks out of the trusted control plane
         env:
           GH_TOKEN: ${{ github.token }}
-          IS_FORK: ${{ github.event.pull_request.head.repo.fork }}
+          IS_FORK: ${{ github.event.pull_request.head.repo.full_name != github.repository }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
           REPOSITORY: ${{ github.repository }}
           EVENT_NAME: ${{ github.event_name }}

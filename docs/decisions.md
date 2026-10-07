@@ -176,3 +176,12 @@ OS-specific path or process behavior, so a Windows job would test the runner, no
 
 **Why.** Trusted publishing is configured per package on npmjs, and the package must exist first.
 No token is stored in the repository or its secrets.
+
+## D14. First-release automation remains held
+
+**Decision.** Release, CD and Automerge jobs are guarded off until the first publication is
+authorized. Keep the release bootstrap commit unchanged from the initial setup.
+
+**Why.** GitHub cannot disable a workflow before it exists on the default branch. Job guards
+prevent imported history from creating releases or publishing while the initial pull request
+lands; the registered workflows can then be disabled through GitHub as well.

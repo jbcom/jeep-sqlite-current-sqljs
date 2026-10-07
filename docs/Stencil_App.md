@@ -92,7 +92,7 @@ export class AppHome {
           if (ret.changes.changes !== 2) {
             throw new Error("Execute 3 users failed");
           }
-          
+
           // Save the database to store
             await jeepSqlite.saveToStore({database: "testNew"});
 

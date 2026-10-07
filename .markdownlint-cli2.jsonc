@@ -1,4 +1,6 @@
 {
+  // Stencil owns this generated component reference; authored API docs are linted separately.
+  "ignores": ["src/components/jeep-sqlite/readme.md"],
   "config": {
     // Tables, image alt text, and API signatures are clearer unwrapped.
     "MD013": false,

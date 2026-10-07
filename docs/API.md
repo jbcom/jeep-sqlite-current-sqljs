@@ -656,6 +656,6 @@ A database can be read from the local disk by using the `File System Access API`
 
 Standard CRUD operations can then being performed, the modifications are save to the store for persistent storage during the session on user's request or at the connection close.
 
-Before closing the connection, the database might also be saved back to the local disk for secure persistent storage (backup) and/or database visibility through the use of SQLite third party tools like DB Browser for SQLite.  
+Before closing the connection, the database might also be saved back to the local disk for secure persistent storage (backup) and/or database visibility through the use of SQLite third party tools like DB Browser for SQLite.
 
 - [from local disk to store](https://github.com/jepiqueau/jeep-sqlite/blob/master/src/index_getFromLocalDiskToStore.html)

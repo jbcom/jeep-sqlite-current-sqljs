@@ -122,5 +122,3 @@ The main change is related to the delete table's rows when a synchronization tab
   - Execute the `deleteExportedRows` method which physically deletes all table's rows having 1 as value for the `sql_deleted` column prior to the `last_exported_date` in your local database.
 
 An example of using this new feature is given in the `index_delete.html` file. It has been used to test the validity of the implementation.
-
-
