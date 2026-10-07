@@ -2,7 +2,7 @@ name: Automerge generated pull requests
 
 on:
   pull_request_target:
-    types: [opened, synchronize, reopened, ready_for_review]
+    types: [opened, synchronize, reopened, ready_for_review, labeled]
 
 permissions:
   contents: read
@@ -17,8 +17,11 @@ jobs:
       github.event.pull_request.draft == false &&
       github.event.pull_request.base.ref == 'main' &&
       github.event.pull_request.head.repo.full_name == github.repository &&
-      ((github.event.pull_request.user.login == 'github-actions[bot]' &&
-      startsWith(github.event.pull_request.head.ref, 'release-please--')) ||
+      ((github.event.pull_request.user.login == 'jbdevprimary' &&
+      github.event.pull_request.head.ref == 'release-please--branches--main--components--jeep-sqlite-current-sqljs' &&
+      startsWith(github.event.pull_request.title, 'chore(main): release ') &&
+      contains(github.event.pull_request.labels.*.name, 'autorelease: pending') &&
+      contains(github.event.pull_request.body, 'This PR was generated with [Release Please]')) ||
       (github.event.pull_request.user.login == 'dependabot[bot]' &&
       startsWith(github.event.pull_request.head.ref, 'dependabot/') &&
       contains(github.event.pull_request.title, 'non-major')))

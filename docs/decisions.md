@@ -193,4 +193,9 @@ required npm 2FA for this package with the other public packages. That approval 
 temporary first-stage source holds, while the repository variable keeps activation a deliberate
 post-merge step. Release and CD retain their original trusted-event and successful-conclusion
 conditions, and Automerge retains its same-repository, branch and generated-actor restrictions.
-Release Please branches must also be authored by `github-actions[bot]`.
+This repository's Release Please action uses `CI_GITHUB_TOKEN`, so its generated pull requests are
+authored by `jbdevprimary`, not `github-actions[bot]`. The Release Please predicate admits only
+that identity with this package's exact generated branch and expected release title, plus the
+`autorelease: pending` label and Release Please body marker. It also listens for `labeled`, so the
+predicate is evaluated after Release Please applies the pending label. Those facts are based on the
+completed `game-session` #5, `persistence-drizzle` #7 and `seeded-maze` #4 release pull requests.
