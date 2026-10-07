@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.9.1](https://github.com/jbcom/jeep-sqlite-current-sqljs/compare/v2.9.0...v2.9.1) (2026-10-07)
+
+
+### Bug Fixes
+
+* admit the trusted release please identity ([a4acfd1](https://github.com/jbcom/jeep-sqlite-current-sqljs/commit/a4acfd1d8da6dfdb8a45ad3c151d570524f71e18))
+* admit the trusted release please identity ([a31daaa](https://github.com/jbcom/jeep-sqlite-current-sqljs/commit/a31daaa115c7722b13a0c781332e6c98daf63580))
+* restrict release please automerge actor ([7d529ab](https://github.com/jbcom/jeep-sqlite-current-sqljs/commit/7d529abb29cd690c76e0c38e07fbc528739a6784))
+* support every maintained Node line (22, 24 and 26) ([3a6a03d](https://github.com/jbcom/jeep-sqlite-current-sqljs/commit/3a6a03dd6be0aa1d858f6653a108dccb43493df5))
+* support every maintained Node line (22, 24 and 26) ([cc1702e](https://github.com/jbcom/jeep-sqlite-current-sqljs/commit/cc1702ed6aa9dac579c1c7ed6271630bbc825d88))
+
 ## 2.9.0 (2026-10-07)
 
 First release of `jeep-sqlite-current-sqljs`: upstream `jeep-sqlite@2.8.0` (`3f3c8f2`) with its
