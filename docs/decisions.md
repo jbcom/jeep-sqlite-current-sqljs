@@ -193,3 +193,4 @@ required npm 2FA for this package with the other public packages. That approval 
 temporary first-stage source holds, while the repository variable keeps activation a deliberate
 post-merge step. Release and CD retain their original trusted-event and successful-conclusion
 conditions, and Automerge retains its same-repository, branch and generated-actor restrictions.
+Release Please branches must also be authored by `github-actions[bot]`.

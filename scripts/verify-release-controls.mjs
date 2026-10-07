@@ -30,11 +30,13 @@ for (const expected of [
   'github.event.pull_request.draft == false',
   "github.event.pull_request.base.ref == 'main'",
   'github.event.pull_request.head.repo.full_name == github.repository',
+  "github.event.pull_request.user.login == 'github-actions[bot]'",
   "startsWith(github.event.pull_request.head.ref, 'release-please--')",
   "github.event.pull_request.user.login == 'dependabot[bot]'",
 ]) {
   requireText(automerge, expected, 'Automerge workflow');
 }
+forbidText(automerge, 'if: false', 'Automerge workflow');
 forbidText(automerge, '\n      false &&', 'Automerge workflow');
 
 const ruleset = read('scripts/apply-branch-ruleset.mjs');
