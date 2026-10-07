@@ -1,0 +1,32 @@
+name: Feature request
+description: Propose a focused change to the build, packaging or docs of jeep-sqlite-current-sqljs.
+title: "feat: "
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This package keeps the upstream component's API. A change to the element's behavior is better
+        proposed upstream at jepiqueau/jeep-sqlite first; this tracker is for the build, the
+        packaging, the dependencies and the docs of this package.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What cannot be done cleanly with the current package?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Show a small usage example and explain why it belongs here rather than in application code or upstream.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Describe current workarounds and compatibility implications.
+    validations:
+      required: true
