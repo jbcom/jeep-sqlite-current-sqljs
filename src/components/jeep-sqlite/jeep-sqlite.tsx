@@ -1926,7 +1926,8 @@ private async unzipDatabase(dbZipName: string, overwrite: boolean): Promise<void
     });
   }
   private async uint2blob(uint: Uint8Array): Promise<Blob> {
-    const blob: Blob = new Blob([uint.buffer]);
+    // Blob the view's own bytes: `uint.buffer` would include bytes outside a sub-view.
+    const blob: Blob = new Blob([uint as Uint8Array<ArrayBuffer>]);
 
     return Promise.resolve(blob);
   }

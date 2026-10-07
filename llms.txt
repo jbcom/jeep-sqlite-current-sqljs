@@ -1,0 +1,27 @@
+# jeep-sqlite-current-sqljs
+
+> The exact upstream jeep-sqlite 2.8.0 (SQLite in the browser as a Stencil web component, on
+> sql.js and IndexedDB, with an API that mirrors @capacitor-community/sqlite), with its Stencil
+> loader and WebAssembly rebuilt together on current sql.js (1.14.1). A newer WASM under the old
+> prebuilt loader is ABI-incompatible; this package is the loader and the WASM built as a pair.
+
+## Docs
+
+- [Documentation site](https://jonbogaty.com/jeep-sqlite-current-sqljs/): the published,
+  browsable version of everything below.
+- [README](https://github.com/jbcom/jeep-sqlite-current-sqljs/blob/main/README.md): what the
+  package is and why it exists, install, quick start, entry points, compatibility.
+- [Getting started](https://github.com/jbcom/jeep-sqlite-current-sqljs/blob/main/docs/getting-started.md):
+  registering the element, serving the WebAssembly binary, a first query.
+- [API reference](https://github.com/jbcom/jeep-sqlite-current-sqljs/blob/main/docs/API.md):
+  every method, event and property, with worked examples.
+- [Architecture](https://github.com/jbcom/jeep-sqlite-current-sqljs/blob/main/docs/ARCHITECTURE.md):
+  how the element, sql.js and IndexedDB fit together, the build outputs, and the limits.
+- [Decisions](https://github.com/jbcom/jeep-sqlite-current-sqljs/blob/main/docs/decisions.md):
+  each call taken in this package and why.
+- [AGENTS.md](https://github.com/jbcom/jeep-sqlite-current-sqljs/blob/main/AGENTS.md):
+  toolchain, invariants not to violate, and doc/test sync obligations for an agent working here.
+- [CONTRIBUTING.md](https://github.com/jbcom/jeep-sqlite-current-sqljs/blob/main/CONTRIBUTING.md):
+  local setup, the `pnpm verify` gate, commit and release conventions.
+- [Upstream](https://github.com/jepiqueau/jeep-sqlite): the original project by Jean Pierre
+  Quéau.

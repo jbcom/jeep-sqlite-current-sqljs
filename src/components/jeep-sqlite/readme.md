@@ -172,7 +172,7 @@
 | **`jsonexportmode`** | <code>string</code>  | The mode to export JSON Object `full` or `partial`      |
 | **`readonly`**       | <code>boolean</code> | The database readonly mode                              |
 
-### SQLiteUpgradeOptions 
+### SQLiteUpgradeOptions
 | Prop           | Type                                | Description                                   |
 | -------------- | ----------------------------------- | --------------------------------------------- |
 | **`database`** | <code>string</code>                 | The database name                             |
@@ -184,7 +184,7 @@
 | **`toVersion`**   | <code>number</code>      | The new database version                              |
 | **`statements`**  | <code>string[]</code>    | A SQL statement defining the schemas                  |
 
-### SQLiteSet 
+### SQLiteSet
 | Prop              | Type                  | Description                                             |
 | ----------------- | --------------------- | ------------------------------------------------------- |
 | **`statement`**   | <code>string</code>   | A SQL statement                                         |
@@ -213,18 +213,18 @@
 | -------------- | --------------------- | ------------------------------------------------------- |
 | **`changes`**  | <code>Changes</code>  | Returned changes                                        |
 
-### Changes 
+### Changes
 | Prop           | Type                  | Description                                             |
 | -------------- | --------------------- | ------------------------------------------------------- |
 | **`changes`**  | <code>number</code>   | Returned number of changes                              |
 | **`lastId`**   | <code>number</code>   | Returned the lastId created from a run command          |
 
-### SQLiteValues 
+### SQLiteValues
 | Prop          | Type                 | Description                                             |
 | ------------- | -------------------- | ------------------------------------------------------- |
 | **`values`**  | <code>any[]</code>   | Returned the data values list as an Array               |
 
-### SQLiteVersion 
+### SQLiteVersion
 | Prop           | Type                 | Description                                 |
 | -------------- | -------------------- | ------------------------------------------- |
 | **`version`**  | <code>number</code>  | Returned the database version               |
@@ -238,7 +238,7 @@
 | Prop            | Type                  | Description                                             |
 | --------------- | --------------------- | ------------------------------------------------------- |
 | **`overwrite`**  | <code>boolean</code> | An overwrite value true/false default true              |
-  
+
 ### SQLiteJson {
 | Prop          | Type                     | Description                                           |
 | ------------- | ------------------------ | ----------------------------------------------------- |
@@ -270,7 +270,7 @@
 ## JSON Types
 
 ### JsonSQLite {
-| Prop              | Type                       | Description                                        |  
+| Prop              | Type                       | Description                                        |
 | ----------------- | -------------------------- | -------------------------------------------------- |
 | **`database`**    | <code>string</code>        | The database name                                  |
 | **`version`**     | <code>number</code>        | The database version                               |
@@ -279,7 +279,7 @@
 | **`tables`**      | <code>JsonTable[]</code>   | Array of Table                                     |
 
 ### JsonTable
-| Prop             | Type                      | Description                                        |  
+| Prop             | Type                      | Description                                        |
 | --------------- | -------------------------- | -------------------------------------------------- |
 | **`name`**      | <code>string</code>        | The table name                                     |
 | **`schema`**    | <code>JsonColumn[]</code>  | Array of Schema                                    |
@@ -288,7 +288,7 @@
 | **`values`**    | <code>any[][]</code>       | Array of Table's data                              |
 
 ### JsonColumn {
-| Prop             | Type                | Description                                        |  
+| Prop             | Type                | Description                                        |
 | ---------------- | ------------------- | -------------------------------------------------- |
 | **`column`**     | <code>string</code> | The column name                                    |
 | **`value`**      | <code>string</code> | The column data (type, unique, ...)                |
@@ -296,7 +296,7 @@
 | **`constraint`** | <code>string</code> | The column constraint                              |
 
 ### JsonTrigger {
-| Prop             | Type                | Description                                        |  
+| Prop             | Type                | Description                                        |
 | ---------------- | ------------------- | -------------------------------------------------- |
 | **`name`**       | <code>string</code> | The trigger name                                   |
 | **`timeevent`**  | <code>string</code> | The trigger time event fired                       |
@@ -304,7 +304,7 @@
 | **`logic`**      | <code>string</code> | The trigger logic                                  |
 
 ### JsonIndex {
-| Prop         | Type                | Description                                        |  
+| Prop         | Type                | Description                                        |
 | ------------ | ------------------- | -------------------------------------------------- |
 | **`name`**   | <code>string</code> | The index name                                     |
 | **`value`**  | <code>string</code> | The index value                                    |

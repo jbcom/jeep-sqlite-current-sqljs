@@ -1,174 +1,12 @@
-![Built With Stencil](https://img.shields.io/badge/-Built%20With%20Stencil-16161d.svg?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIgNTEyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI%2BCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI%2BCgkuc3Qwe2ZpbGw6I0ZGRkZGRjt9Cjwvc3R5bGU%2BCjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik00MjQuNywzNzMuOWMwLDM3LjYtNTUuMSw2OC42LTkyLjcsNjguNkgxODAuNGMtMzcuOSwwLTkyLjctMzAuNy05Mi43LTY4LjZ2LTMuNmgzMzYuOVYzNzMuOXoiLz4KPHBhdGggY2xhc3M9InN0MCIgZD0iTTQyNC43LDI5Mi4xSDE4MC40Yy0zNy42LDAtOTIuNy0zMS05Mi43LTY4LjZ2LTMuNkgzMzJjMzcuNiwwLDkyLjcsMzEsOTIuNyw2OC42VjI5Mi4xeiIvPgo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNDI0LjcsMTQxLjdIODcuN3YtMy42YzAtMzcuNiw1NC44LTY4LjYsOTIuNy02OC42SDMzMmMzNy45LDAsOTIuNywzMC43LDkyLjcsNjguNlYxNDEuN3oiLz4KPC9zdmc%2BCg%3D%3D&colorA=16161d&style=flat-square)
+---
+title: API reference
+description: Every method and event of the jeep-sqlite element, with worked usage.
+---
 
-# jeep-sqlite
-
-## Arcade Cabinet current-upstream build
-
-`@arcade-cabinet/jeep-sqlite@2.8.0-arcade.1` is built from the exact public
-`jeep-sqlite@2.8.0` tag (`3f3c8f2`) with its runtime foundations advanced to
-their current stable releases. In particular, the generated Stencil loader and
-the shipped WASM are built together from `sql.js@1.14.1`; substituting that
-WASM underneath the public package's older prebuilt loader is ABI-incompatible.
-
-This private build exists only to close that upstream release gap. It preserves
-the public component API and source attribution, and it must be retired or
-rebased when a newer public `jeep-sqlite` release provides equivalent current
-dependency support. Release proof includes the upstream test/build gates plus a
-real `@capacitor-community/sqlite` browser save/reload consumer.
-
-`jeep-sqlite`is a Stencil component to create SQLite database and query it in the browser. The entire database is stored in an `IndexedDB` store named `jeepSQLiteStore` in a table `databases`. Multiple databases can be stored on this table.
-
-`jeep-sqlite` is based on `sql.js`for SQLite queries and `localforage`for database storage in IndexedDB.
-
-This component might be used in PWA applications. It will also be used in the web implementation of the `@capacitor-community-sqlite`.
-
-This is the reason for having similar API than the `@capacitor-community-sqlite`. Look at the `@capacitor-community-sqlite`documentation and CHANGELOG.md
-
-It will be used at that stage to test the integration with the `@capacitor-community-sqlite` but can also be used in development of `Stencil` or `Ionic/Angular` applications.
-
-Integration in other frameworks (`Vue`, `React`, `Ionic/Vue`, `Ionic/React`,`SolidJS`) are alos available.
-
-Stencil is also great for building entire apps. For that, use the [stencil-app-starter](https://github.com/ionic-team/stencil-app-starter) instead.
-
-!!!!!!!!!!!!!!!!!!!!!!!!!! 
-When you get this message
-
-```
-I am getting the following error in console in ionic Application.
-Error: Uncaught (in promise): TypeError: x is not a function
-TypeError: x is not a function
-at x (jeep-sqlite.entry.js:2648:80)
-at f.onRuntimeInitialized (jeep-sqlite.entry.js:2555:318) 
-...
-``` 
-
-means that you have to copy the sql-wasm.wasm from node_modules/sql.js/dist/sql-wasm.wasm to your application assets directory
-!!!!!!!!!!!!!!!!!!!!!!!!!! 
-
-## Notes
- - Realease 2.8.0 ->>
-    Update @stencil/core to 4.20.0
-    Update sql.js to 1.11.0
-    Merge PR#41: Support production build for bundlers like Vite by setting Stencil extra.enableImportInjection=true  frpm thomasjahoda 
-
- - Release 2.5.6 ->>
-    Step back to sql.js@1.8.0  as sql.js@1.9.0  give an `Error: out of memory` see issue #33.
-
- - Release 2.5.0 ->>
-    - add methods to manage the transaction process flow :
-      `beginTransaction, commitTransaction, rollbackTransaction,
-       isActiveTransaction` see index_transaction.html
-    - upgrade to @stencil/core@4.0.5
-    
- - Release 2.3.8 ->>
-    - add support for RETURNING in sqlite statement
-
- - Release 2.3.2 ->>
-    - add property `pickText` to customize the pick button text.
-    - add property `saveText` to customize the save button text.
-    - add property `buttonOptions` to customise the button style.
-    - add - From Local Disk to Store - to Usage chapter.
-    
- - Release 2.3.1 ->>
-    - add `jeepSqliteSaveDatabaseToDisk`event listener.
-
- - Release 2.3.0 ->>
-    Use of the `File System Access API` through the [Browser-FS-Access](https://www.npmjs.com/package/browser-fs-access) module.
-    - add `getFromLocalDiskToStore`: read a database from your local disk and save it to the IndexedDB `jeepSqliteStore` store.
-    - add `saveToLocalDisk`: save a database to your local disk will allows developers to view the database in separate DB tools like `DB Browser for Sqlite`.
-    - add `jeepSqlitePickDatabaseEnded` event listener.
-    - add `index_getFromLocalDiskToStore.html` to demonstrate the use of the two new methods.
-
- - Release 2.1.0, 2.2.0->> DEPRECATED
-
- - Release 1.6.6 ->>
-    fix WAL mode for concurrency access to databases. WAL2 is not supported
-    
- - Release 1.6.4 ->> 
-    add `jeepSqliteHTTPRequestEnded` event listener
-
- - Release 1.6.3 ->> 
-    add `getFromHTTPRequest` to get database or zip containing multiple database files from a remote server.
-
- - Release 1.6.2 ->> 
-    add database read-only mode
-
- - Release 1.6.0 ->> 
-    Update sql.js@1.8.0
-    
- - Release 1.5.8 ->> 
-    The API method `addUpgradeStatement` has been modified to define the new structure of the database as a list of incremental upgrades. Every upgrade is executed over the previous version.
-    see https://github.com/capacitor-community/sqlite/blob/master/docs/UpgradeDatabaseVersion.md
-
- - Release 1.5.7 ->> 
-    The path for the `sql-wasm.wasm` file which is by default `/assets` can now be specified by adding the property `wasmPath` to `jeep-sqlite`
-
-    - default
-
-    ```
-    <jeep-sqlite autoSave="true"></jeep-sqlite>
-    ```
-
-    - given the wasm file path
-
-    ```
-    <jeep-sqlite autoSave="true" wasmPath="/assets/wasm"></jeep-sqlite>
-    ```
-
- - Release 1.5.0 ->> 
-
-The main change is related to the delete table's rows when a synchronization table exists as well as a last_mofidied table's column, allowing for database synchronization of the local database with a remote server database.
-
-- All existing triggers to YOUR_TABLE_NAME_trigger_last_modified must be modified as follows
-  ```
-  CREATE TRIGGER YOUR_TABLE_NAME_trigger_last_modified
-    AFTER UPDATE ON YOUR_TABLE_NAME
-    FOR EACH ROW WHEN NEW.last_modified < OLD.last_modified
-    BEGIN
-        UPDATE YOUR_TABLE_NAME SET last_modified= (strftime('%s', 'now')) WHERE id=OLD.id;
-    END;
-  ```
-- an new column `sql_deleted` must be added to each of your tables as
-  ```
-  sql_deleted BOOLEAN DEFAULT 0 CHECK (sql_deleted IN (0, 1))
-  ```
-  This column will be autommatically set to 1 when you will use a `DELETE FROM ...` sql statement in the `execute`, `run` or `executeSet` methods.
-
-- In the JSON object that you provide to `importFromJson`, all the deleted rows in your remote server database's tables must have the `sql_deleted` column set to 1. This will indicate to the import process to physically delete the corresponding rows in your local database. All the others rows must have the `sql_deleted` column set to 0. 
-
-- In the JSON object outputs by the `exportToJson`, all the deleted rows in your local database have got the `sql_deleted` column set to 1 to help in your synchronization management process with the remote server database. A system `last_exported_date` is automatically saved in the synchronization table at the start of the export process flow.
-
-- On successfull completion of your synchronization management process with the remote server database, you must 
-  - Set a new synchronization date (as `(new Date()).toISOString()`) with the `setSyncDate` method.
-  - Execute the `deleteExportedRows` method which physically deletes all table's rows having 1 as value for the `sql_deleted` column prior to the `last_exported_date` in your local database.
-
-An example of using this new feature is given in the `index_delete.html` file. It has been used to test the validity of the implementation.
-
-
-## Getting Started
-
-
-### Script tag
-
-- Put a script tag similar to this 
-
-```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/jeep-sqlite@latest/dist/jeep-sqlite/jeep-sqlite.esm.js"></script>
-```
-in the head of your index.html
-- Then you can use the element anywhere in your template, JSX, html etc
-
-### Node Modules
-- Run `npm install jeep-sqlite --save`
-- Put a script tag similar to this
- `<script src='node_modules/jeep-sqlite/dist/jeep-sqlite.esm.js'></script>` 
- in the head of your index.html
-- Then you can use the element anywhere in your template, JSX, html etc
-
-### In a stencil-starter app
-- Run `npm install jeep-sqlite --save`
-- Add an import to the npm packages `import jeep-sqlite;`
-- Then you can use the element anywhere in your template, JSX, html etc
+This page is the method, event and usage reference. It descends from the upstream
+`jeep-sqlite` readme, which remains the authority on behavior that this package has not
+changed. Installing and wiring the element into an application is covered in
+[Getting started](getting-started.md).
 
 ## Supported methods
 
@@ -185,7 +23,7 @@ in the head of your index.html
 | run                         | ✅      |
 | query                       | ✅      |
 | deleteDatabase              | ✅      |
-| isDBExists                  | ✅      | 
+| isDBExists                  | ✅      |
 | isDBOpen                    | ✅      |
 | isStoreOpen                 | ✅      |
 | isTableExists               | ✅      |
@@ -196,7 +34,7 @@ in the head of your index.html
 | isJsonValid                 | ✅      |
 | importFromJson              | ✅      |
 | exportToJson                | ✅      |
-| deleteExportedRows          | ✅      | NEW in 1.5.0
+| deleteExportedRows          | ✅      |
 | copyFromAssets              | ✅      |
 | addUpgradeStatement         | ✅      |
 | isDatabase                  | ✅      |
@@ -204,16 +42,19 @@ in the head of your index.html
 | getTableList                | ✅      |
 | checkConnectionsConsistency | ✅      |
 | saveToStore                 | ✅      |
-| getFromHTTPRequest          | ✅      | New in 1.6.3
-| getFromLocalDiskToStore     | ✅      | New in 2.3.0
-| saveToLocalDisk             | ✅      | New in 2.3.0
+| getFromHTTPRequest          | ✅      |
+| getFromLocalDiskToStore     | ✅      |
+| saveToLocalDisk             | ✅      |
 
+`deleteExportedRows` was added in 1.5.0, `getFromHTTPRequest` in 1.6.3, and
+`getFromLocalDiskToStore` and `saveToLocalDisk` in 2.3.0.
 
 The database is saved when you run the methods `close`or `closeConnection`, in the Browser Storage `IndexedDB` as a `localforage` store under the `jeepSqliteStore` name and `databases`table name.
 
-The `copyFromAssets` required to have a `databases.json`file having the name of the databases in the `assets/databases` 
+The `copyFromAssets` required to have a `databases.json`file having the name of the databases in the `assets/databases`
 
 The `databases.json` file is for example
+
 ```json
 {
   "databaseList" : [
@@ -222,6 +63,7 @@ The `databases.json` file is for example
   ]
 }
 ```
+
 if `dbForCopy.db` and `myDBSQLite.db` are databases located in the `assets/databases` folder.
 
 ## Supported Events
@@ -234,9 +76,7 @@ if `dbForCopy.db` and `myDBSQLite.db` are databases located in the `assets/datab
 | jeepSqlitePickDatabaseEnded  | ✅      |
 | jeepSqliteSaveDatabaseToDisk | ✅      |
 
-
 ## Usage
-
 
 ```html
 <!DOCTYPE html>
@@ -816,6 +656,6 @@ A database can be read from the local disk by using the `File System Access API`
 
 Standard CRUD operations can then being performed, the modifications are save to the store for persistent storage during the session on user's request or at the connection close.
 
-Before closing the connection, the database might also be saved back to the local disk for secure persistent storage (backup) and/or database visibility through the use of SQLite third party tools like DB Browser for SQLite.  
+Before closing the connection, the database might also be saved back to the local disk for secure persistent storage (backup) and/or database visibility through the use of SQLite third party tools like DB Browser for SQLite.
 
- - [from local disk to store](https://github.com/jepiqueau/jeep-sqlite/blob/master/src/index_getFromLocalDiskToStore.html)
+- [from local disk to store](https://github.com/jepiqueau/jeep-sqlite/blob/master/src/index_getFromLocalDiskToStore.html)

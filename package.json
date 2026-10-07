@@ -1,7 +1,7 @@
 {
-  "name": "@arcade-cabinet/jeep-sqlite",
-  "version": "2.8.0-arcade.2",
-  "description": "Private current-upstream build of jeep-sqlite 2.8.0 for Arcade Cabinet browser SQLite consumers",
+  "name": "jeep-sqlite-current-sqljs",
+  "version": "2.9.0",
+  "description": "jepiqueau/jeep-sqlite 2.8.0 (SQLite in the browser as a Stencil web component) with its loader and WebAssembly rebuilt together on current sql.js.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
   "es2015": "dist/esm/index.mjs",
@@ -10,54 +10,127 @@
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",
   "unpkg": "dist/jeep-sqlite/jeep-sqlite.esm.js",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/types/components.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/types/components.d.ts",
+        "default": "./dist/index.cjs.js"
+      }
+    },
+    "./loader": {
+      "import": {
+        "types": "./loader/index.d.ts",
+        "default": "./dist/esm/loader.js"
+      },
+      "require": {
+        "types": "./loader/index.d.ts",
+        "default": "./loader/index.cjs.js"
+      }
+    },
+    "./dist/components/*": "./dist/components/*",
+    "./dist/jeep-sqlite/*": "./dist/jeep-sqlite/*",
+    "./sql-wasm-browser.wasm": "./wasm/sql-wasm-browser.wasm",
+    "./sql-wasm.wasm": "./wasm/sql-wasm.wasm",
+    "./package.json": "./package.json"
+  },
   "files": [
     "dist/",
-    "loader/"
+    "loader/",
+    "wasm/",
+    "CHANGELOG.md"
   ],
+  "sideEffects": true,
   "scripts": {
     "copy:sql:wasm": "node scripts/copy-wasm.mjs",
-    "build": "npm run copy:sql:wasm && stencil build --docs && npm run verify:dist",
-    "prepack": "npm run build",
-    "start": "npm run copy:sql:wasm && stencil build --dev --watch --serve",
+    "build": "pnpm run copy:sql:wasm && stencil build --docs && node scripts/mark-esm.mjs && pnpm run verify:dist",
+    "start": "pnpm run copy:sql:wasm && stencil build --dev --watch --serve",
+    "clean": "node -e \"for (const d of ['dist','loader','www','coverage','.stencil']) require('node:fs').rmSync(d, { recursive: true, force: true })\"",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
     "test": "vitest run",
-    "test:unit": "vitest run",
-    "test.watch": "vitest",
-    "verify:dist": "node scripts/verify-browser-dist.mjs",
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage",
     "generate": "stencil generate",
-    "verify:currency": "npm outdated --omit=dev",
-    "verify:security": "npm audit --omit=dev --audit-level=high"
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "lint:docs": "markdownlint-cli2 README.md CONTRIBUTING.md SECURITY.md CODE_OF_CONDUCT.md CHANGELOG.md AGENTS.md \"docs/**/*.md\" \"!docs/node_modules/**\" \"!docs/dist/**\" .github/PULL_REQUEST_TEMPLATE.md",
+    "verify:dist": "node scripts/verify-browser-dist.mjs",
+    "package:check": "publint && attw --pack . --exclude-entrypoints ./sql-wasm-browser.wasm ./sql-wasm.wasm --ignore-rules false-cjs && node scripts/verify-package.mjs",
+    "verify": "pnpm run lint && pnpm run lint:docs && pnpm run typecheck && pnpm run coverage && pnpm run build && pnpm run package:check",
+    "prepack": "pnpm run build",
+    "docs:dev": "pnpm --filter jeep-sqlite-current-sqljs-docs dev",
+    "docs:build": "pnpm --filter jeep-sqlite-current-sqljs-docs build",
+    "docs:check": "pnpm --filter jeep-sqlite-current-sqljs-docs check",
+    "prepare": "simple-git-hooks"
   },
   "dependencies": {
-    "@stencil/core": "4.44.0",
-    "browser-fs-access": "0.38.0",
-    "jszip": "3.10.1",
-    "localforage": "1.10.0",
-    "sql.js": "1.14.2"
+    "@stencil/core": "^4.45.2",
+    "browser-fs-access": "^0.38.0",
+    "jszip": "^3.10.1",
+    "localforage": "^1.10.0",
+    "sql.js": "1.14.1"
   },
   "devDependencies": {
-    "@types/node": "26.2.0",
-    "@types/sql.js": "1.4.11",
-    "@stencil/vitest": "1.14.0",
-    "rollup-plugin-node-polyfills": "0.2.1",
-    "vitest": "4.1.10"
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@biomejs/biome": "^2.5.15",
+    "@commitlint/cli": "^21.2.3",
+    "@commitlint/config-conventional": "^21.2.3",
+    "@stencil/vitest": "^1.15.1",
+    "@types/node": "^26.2.0",
+    "@types/sql.js": "^1.4.11",
+    "@vitest/coverage-v8": "^4.1.10",
+    "lint-staged": "^17.6.0",
+    "markdownlint-cli2": "^0.23.3",
+    "publint": "^0.3.25",
+    "rollup-plugin-node-polyfills": "^0.2.1",
+    "simple-git-hooks": "^2.14.0",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm exec lint-staged",
+    "commit-msg": "pnpm exec commitlint --edit $1"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,mjs,cjs,json}": [
+      "biome check --write --no-errors-on-unmatched"
+    ],
+    "!(docs/superpowers/**)*.md": [
+      "markdownlint-cli2"
+    ]
   },
   "keywords": [
-    "SQLite",
-    "SQLite in Browser",
+    "sqlite",
+    "sqlite-in-browser",
+    "sql.js",
+    "indexeddb",
     "stencil",
-    "web component"
+    "web-component",
+    "capacitor",
+    "capacitor-community-sqlite"
   ],
-  "author": "Jean Pierre Quéau",
+  "author": "Jon Bogaty <jon@jonbogaty.com>",
+  "contributors": [
+    "Jean Pierre Quéau (original author of jeep-sqlite)"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jbcom/jeep-sqlite.git"
+    "url": "git+https://github.com/jbcom/jeep-sqlite-current-sqljs.git"
   },
+  "homepage": "https://github.com/jbcom/jeep-sqlite-current-sqljs#readme",
   "bugs": {
-    "url": "https://github.com/jepiqueau/jeep-sqlite.git/issues"
+    "url": "https://github.com/jbcom/jeep-sqlite-current-sqljs/issues"
   },
   "publishConfig": {
-    "access": "restricted",
-    "registry": "https://registry.npmjs.org/"
-  }
+    "access": "public",
+    "provenance": true
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "packageManager": "pnpm@12.10.1"
 }

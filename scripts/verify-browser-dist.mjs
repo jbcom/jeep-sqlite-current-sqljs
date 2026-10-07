@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 const DISTRIBUTION_ROOT = fileURLToPath(new URL('../dist/', import.meta.url));
 const JAVASCRIPT_EXTENSIONS = new Set(['.js', '.mjs', '.cjs']);
 const BARE_NODE_IMPORT =
-  /(?:\bfrom\s*|\bimport\s*\(|\brequire\s*\()\s*['"](?:node:)?(?:buffer|process)['"]/;
+  /(?:\bfrom\s*|\bimport\s*\(?\s*|\brequire\s*\()\s*['"](?:node:)?(?:buffer|process)['"]/;
 
 async function distributionFiles(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
