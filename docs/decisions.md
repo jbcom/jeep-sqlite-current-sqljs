@@ -57,8 +57,9 @@ loader built on a different sql.js, an `exports` map, and the WebAssembly files 
 
 ## D4. History descends from upstream, byte for byte
 
-**Decision.** The repository is a GitHub fork of `jepiqueau/jeep-sqlite`, and `main` is upstream's
-history with this package's commits on top.
+**Decision.** Preserve upstream's history byte for byte, with this package's commits on top.
+The intended GitHub repository is a fork of `jepiqueau/jeep-sqlite`; creating it and verifying
+the fork relationship remain publication steps. The local checkout has no remote yet.
 
 **Why.** Attribution, and so that a pull request upstream is a normal fork pull request. The earlier
 private build had to be sanitized for publication (hostnames and local paths rewritten in commit
