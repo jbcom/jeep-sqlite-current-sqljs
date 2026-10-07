@@ -22,10 +22,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # engines.node in package.json is the floor (>=24). This package builds
+        # engines.node in package.json is the floor (>=22). This package builds
         # a browser artifact and touches no OS-specific paths or processes, so
         # Linux alone covers it.
         include:
+          - os: ubuntu-24.04
+            node: "22"
           - os: ubuntu-24.04
             node: "24"
           - os: ubuntu-24.04
