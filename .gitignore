@@ -1,6 +1,7 @@
 dist/
 www/
 loader/
+wasm/
 
 *~
 *.sw[mnpcod]
@@ -24,3 +25,8 @@ $RECYCLE.BIN/
 Thumbs.db
 UserInterfaceState.xcuserstate
 .env
+
+coverage/
+*.tgz
+docs/dist/
+.claude/
