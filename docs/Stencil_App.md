@@ -2,16 +2,20 @@
 
 ## Getting started
 
-- Run 
+- Run
 
 ```bash
-npm install --save jeep-sqlite
+npm install --save jeep-sqlite-current-sqljs
 npm install --save-dev rollup-plugin-node-polyfills
 ```
 
-- Add an import to the npm packages `import jeep-sqlite;` in the `app.ts` file
+- Add an import to the npm package, `import 'jeep-sqlite-current-sqljs';`, in the `app.ts` file
 
-- Modify the `stencil.config.ts` has followed
+- Modify the `stencil.config.ts` as follows. Importing the package this way compiles its
+  Stencil collection inside your own build, so your build supplies the Node polyfills that
+  `sql.js` and `jszip` need. (Applications that register the element through the `loader` or
+  `dist/components` entries get the polyfills bundled and need none; see
+  [Getting started](getting-started.md).)
 
 ```js
 import { Config } from '@stencil/core';
@@ -32,7 +36,8 @@ export const config: Config = {
     type: 'www',
     serviceWorker: null,
     copy: [
-      { src: '../node_modules/sql.js/dist/sql-wasm.wasm', dest: 'assets/sql-wasm.wasm' },
+      { src: '../node_modules/jeep-sqlite-current-sqljs/wasm/sql-wasm-browser.wasm', dest: 'assets/sql-wasm-browser.wasm' },
+      { src: '../node_modules/jeep-sqlite-current-sqljs/wasm/sql-wasm.wasm', dest: 'assets/sql-wasm.wasm' },
     ]
 }],
 };
@@ -40,7 +45,7 @@ export const config: Config = {
 
 - Then you can use the element anywhere in your template, JSX, html etc
 
-## Usage 
+## Usage
 
 ```js
 import { Component, h } from '@stencil/core';

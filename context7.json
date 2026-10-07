@@ -1,0 +1,17 @@
+{
+  "$schema": "https://context7.com/schema/context7.json",
+  "projectTitle": "jeep-sqlite",
+  "description": "SQLite in the browser as a Stencil web component, on sql.js and IndexedDB, with an API that mirrors @capacitor-community/sqlite. The exact upstream jepiqueau/jeep-sqlite 2.8.0 with its loader and WebAssembly rebuilt together on current sql.js.",
+  "branch": "main",
+  "folders": ["docs", "src"],
+  "excludeFolders": ["node_modules", "dist", "coverage", "docs/dist", "docs/node_modules"],
+  "excludeFiles": ["CHANGELOG.md"],
+  "rules": [
+    "Copy sql-wasm-browser.wasm from the package's wasm/ directory (or import 'jeep-sqlite-current-sqljs/sql-wasm-browser.wasm') into the public assets path (default /assets, or set the wasmPath property); a missing binary surfaces as 'TypeError: x is not a function'.",
+    "Never pair the loader with a WebAssembly binary from a different sql.js release: it fails with a LinkError.",
+    "Register the element with defineCustomElements from 'jeep-sqlite-current-sqljs/loader'.",
+    "Applications do not need rollup-plugin-node-polyfills: the polyfills are bundled in the distribution.",
+    "A database is persisted to IndexedDB on close, closeConnection or saveToStore, or after every change when the autosave property is set.",
+    "Await customElements.whenDefined('jeep-sqlite') and isStoreOpen() before the first call."
+  ]
+}

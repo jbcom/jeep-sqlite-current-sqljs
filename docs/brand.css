@@ -1,0 +1,9 @@
+:root {
+  --sourcey-primary: #16161d;
+  --sourcey-primary-light: #5a67d8;
+  --sourcey-primary-dark: #0b0b10;
+}
+
+a:hover {
+  color: var(--sourcey-primary-light);
+}
