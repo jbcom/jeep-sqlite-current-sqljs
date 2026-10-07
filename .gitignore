@@ -30,3 +30,5 @@ coverage/
 *.tgz
 docs/dist/
 .claude/
+# Local agent runtime state; never part of the package.
+.agent-state/
