@@ -53,7 +53,9 @@ try {
     ['pack', '--pack-destination', scratch, '--ignore-scripts', '--json'],
     { cwd: packageRoot, encoding: 'utf8', env, shell },
   );
-  const jsonStart = packOutput.search(/^\[/m);
+  // npm 10 can print prepare-hook output even with --ignore-scripts; a hook's
+  // [INFO] line is not the start of npm's JSON array of package objects.
+  const jsonStart = packOutput.search(/^\[\s*\{/m);
   assert(jsonStart !== -1, `npm pack produced no JSON array:\n${packOutput}`);
   const [pack] = JSON.parse(packOutput.slice(jsonStart));
   const packed = new Set(pack.files.map((file) => file.path));

@@ -18,7 +18,7 @@ call and why.
 
 - Package manager: pnpm, pinned in `package.json#packageManager`. `mise install` (reads
   `mise.toml`) gives a matching Node and pnpm, or use `corepack enable`.
-- Node 26 for development (`.nvmrc`); `engines.node` is `>=24` and CI verifies 24 and 26.
+- Node 26 for development (`.nvmrc`); `engines.node` is `>=22` and CI verifies Node.js 22, 24 and 26.
 - This is a pnpm workspace with two members: `.` (the published package) and `docs/` (the
   private Sourcey documentation site). Root scripts operate on the package; `pnpm docs:*`
   delegate to `docs/` through `pnpm --filter jeep-sqlite-current-sqljs-docs`.

@@ -138,7 +138,7 @@ The full reference with worked examples is [docs/API.md](docs/API.md).
 | Browsers | Any with WebAssembly and `IndexedDB`. `saveToLocalDisk` and `getFromLocalDiskToStore` use the File System Access API where present. |
 | Bundlers | Vite, webpack and Rollup, through the `loader` entry. `extras.enableImportInjection` is on, so production builds resolve the lazy chunks. |
 | Frameworks | Stencil, Ionic, React, Vue, SolidJS, or none. See [docs/Stencil_App.md](docs/Stencil_App.md) for Stencil. |
-| Node | `>=24` to build or install. The component itself runs only in a browser. |
+| Node | Node.js 22, 24 and 26 (`>=22`) to build or install. The component itself runs only in a browser. |
 
 ## Links
 

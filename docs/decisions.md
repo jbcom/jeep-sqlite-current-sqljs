@@ -161,11 +161,14 @@ tail of `CHANGELOG.md`; `README.md` is new. The empty upstream `IonicAngular_App
 **Why.** The method, event and usage reference is the useful part of upstream's readme and is kept
 intact. An empty guide in a documentation navigation is a dead link.
 
-## D12. CI covers Node 24 and 26 on Linux
+## D12. CI covers every maintained Node line on Linux
 
-**Decision.** Node 24 and 26 on `ubuntu-24.04`; no Windows job.
+**Decision.** Node.js 22, 24 and 26 on `ubuntu-24.04`; no Windows job. Local development
+defaults to Node 26, but contributors may use any supported line without an exact-version guard.
 
-**Why.** `engines.node` is `>=24`. The package builds a browser artifact and touches no
+**Why.** `engines.node` is `>=22`: the full verification chain, including tests and packed-consumer
+imports, passes on Node 22 and 26. CI uses major versions to follow supported patch updates.
+The package builds a browser artifact and touches no
 OS-specific path or process behavior, so a Windows job would test the runner, not the package.
 
 ## D13. The first publish is local; later releases publish by OIDC
