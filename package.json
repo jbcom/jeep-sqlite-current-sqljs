@@ -41,7 +41,8 @@
     "dist/",
     "loader/",
     "wasm/",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "!**/*.map"
   ],
   "sideEffects": true,
   "scripts": {

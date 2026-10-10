@@ -81,6 +81,12 @@ try {
   ]) {
     assert(packed.has(required), `packed artifact is missing ${required}`);
   }
+  // Source maps would sit beside the lazy loader's `*.entry.js` chunks, where its template import
+  // reaches them and an application's bundler (esbuild, Vite's pre-bundling) fails on them.
+  assert(
+    [...packed].every((file) => !file.endsWith('.map')),
+    'packed artifact ships source maps',
+  );
   for (const forbidden of [
     'src/',
     'scripts/',
@@ -209,9 +215,8 @@ try {
       format: 'esm',
       platform: 'browser',
       logLevel: 'silent',
-      // Stencil's lazy loader imports \`./\${bundleId}.entry.js\` and tells webpack to include only
-      // \`*.entry.js\`; esbuild expands the template to every sibling, source maps included.
-      loader: { '.map': 'empty' },
+      // No loader options: Stencil's lazy loader imports \`./\${bundleId}.entry.js\`, which esbuild
+      // expands to every sibling, so a shipped \`.entry.js.map\` broke every consumer's bundle.
     }).then((result) => {
       assert(result.errors.length === 0);
       const code = result.outputFiles[0].text;
