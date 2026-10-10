@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.9.2](https://github.com/jbcom/jeep-sqlite-current-sqljs/compare/v2.9.1...v2.9.2) (2026-10-10)
+
+
+### Bug Fixes
+
+* **package:** ship no source maps, so a consumer's bundler can pre-bundle the loader ([f7dedb3](https://github.com/jbcom/jeep-sqlite-current-sqljs/commit/f7dedb3e961b91840608408f10d7c739802ae586))
+* **package:** ship no source maps, so a consumer's bundler can pre-bundle the loader ([8cb10e6](https://github.com/jbcom/jeep-sqlite-current-sqljs/commit/8cb10e64e3fe989c343c06053060c217954981f7))
+
 ## [2.9.1](https://github.com/jbcom/jeep-sqlite-current-sqljs/compare/v2.9.0...v2.9.1) (2026-10-07)
 
 

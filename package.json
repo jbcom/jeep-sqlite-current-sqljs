@@ -1,6 +1,6 @@
 {
   "name": "jeep-sqlite-current-sqljs",
-  "version": "2.9.1",
+  "version": "2.9.2",
   "description": "jepiqueau/jeep-sqlite 2.8.0 (SQLite in the browser as a Stencil web component) with its loader and WebAssembly rebuilt together on current sql.js.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
