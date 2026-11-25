@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.9.3](https://github.com/jbcom/jeep-sqlite-current-sqljs/compare/v2.9.2...v2.9.3) (2026-11-25)
+
+
+### Bug Fixes
+
+* keep stored databases on interrupted replacement ([a650647](https://github.com/jbcom/jeep-sqlite-current-sqljs/commit/a6506476cf093ed5cb6bc19dc929bb467b9f5084))
+* keep stored databases on interrupted replacement ([becf1b9](https://github.com/jbcom/jeep-sqlite-current-sqljs/commit/becf1b9d414be388c4457a48d85e46d2dd3a8903))
+* report failed replacements with errors ([eae336c](https://github.com/jbcom/jeep-sqlite-current-sqljs/commit/eae336ca416eb16cf6042ec34807fcf0645fff88))
+
 ## [2.9.2](https://github.com/jbcom/jeep-sqlite-current-sqljs/compare/v2.9.1...v2.9.2) (2026-10-10)
 
 
