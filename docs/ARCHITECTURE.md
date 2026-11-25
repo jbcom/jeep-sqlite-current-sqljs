@@ -34,8 +34,8 @@ application ──> <jeep-sqlite> element ──> Database (one per connection) 
 2. **Statements** run against the in-memory database. `execute` and `executeSet` run
    several statements, `run` one with bound values, `query` returns rows. A transaction
    opened with `beginTransaction` stays open until committed or rolled back.
-3. **Save** exports the in-memory database to bytes and replaces the stored value
-   (`removeItem` then `setItem`).
+3. **Save** exports the in-memory database to bytes and replaces the stored value with one
+   `setItem` call. A rejected replacement leaves the previous durable value available on reopen.
 4. **Synchronization** is optional. A `sync_table` holds a last-synchronized date, tables
    carry `last_modified` and `sql_deleted` columns, and `importFromJson` and `exportToJson`
    move only rows changed since that date. `deleteExportedRows` physically removes rows

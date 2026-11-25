@@ -1093,7 +1093,6 @@ export class JeepSqlite {
         await UtilsStore.saveDBToStore(dbName, uInt8Array, this.store);
       } else  {
         if(this._overwrite) {
-          await UtilsStore.removeDBFromStore(dbName, this.store);
           await UtilsStore.saveDBToStore(dbName, uInt8Array, this.store);
         } else {
           this.PickDatabaseEnded.emit({message:`Error: cannot overwrite ${dbName}`});
@@ -1818,7 +1817,6 @@ private async unzipDatabase(dbZipName: string, overwrite: boolean): Promise<void
             await UtilsStore.saveDBToStore(dbName, uInt8Array, this.store);
           } else  {
             if(overwrite) {
-              await UtilsStore.removeDBFromStore(dbName, this.store);
               await UtilsStore.saveDBToStore(dbName, uInt8Array, this.store);
               } else {
               reject(new Error(`retrieveDBFromZip: cannot overwrite ${dbName}`));
@@ -1852,7 +1850,6 @@ private async unzipDatabase(dbZipName: string, overwrite: boolean): Promise<void
           await UtilsStore.saveDBToStore(dbName, uInt8Array, this.store);
         } else  {
           if(overwrite) {
-            await UtilsStore.removeDBFromStore(dbName, this.store);
             await UtilsStore.saveDBToStore(dbName, uInt8Array, this.store);
           } else {
             reject(new Error(`CopyDatabase Error: cannot overwrite ${dbName}`));

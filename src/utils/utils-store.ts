@@ -27,17 +27,16 @@ export class UtilsStore {
 
       return Promise.resolve();
     } catch (err) {
-      return Promise.reject(`SetDBToStore: ${err.message}`);
+      throw new Error(`SetDBToStore: ${err instanceof Error ? err.message : String(err)}`);
     }
   }
   static async saveDBToStore(dbName: string, data: Uint8Array, store: LocalForage): Promise<void> {
     try {
-      await store.removeItem(dbName);
-      // store the database
+      // Replace in one store write so a failed write leaves the last checkpoint intact.
       await store.setItem(dbName, data);
       return Promise.resolve();
     } catch (err) {
-      return Promise.reject(`SaveDBToStore: ${err.message}`);
+      throw new Error(`SaveDBToStore: ${err instanceof Error ? err.message : String(err)}`);
     }
   }
   static async removeDBFromStore(dbName: string, store: LocalForage): Promise<void> {

@@ -199,3 +199,14 @@ that identity with this package's exact generated branch and expected release ti
 `autorelease: pending` label and Release Please body marker. It also listens for `labeled`, so the
 predicate is evaluated after Release Please applies the pending label. Those facts are based on the
 completed `game-session` #5, `persistence-drizzle` #7 and `seeded-maze` #4 release pull requests.
+
+## D15. Keep the durable checkpoint during database replacement
+
+**Decision.** Replace persisted database bytes in one localForage write. The open database and
+file import paths use the same replacement operation. Open, close, and overwrite permissions
+retain their existing API contracts.
+
+**Why.** The IndexedDB driver's `setItem` resolves on the transaction's completion. A separate
+delete could succeed before a quota error or an interruption during the following write. In that
+case the reopen path saw no database and created a blank one. A failed replacement leaves the
+last successful database bytes intact.

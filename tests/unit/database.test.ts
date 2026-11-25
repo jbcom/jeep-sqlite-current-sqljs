@@ -116,6 +116,24 @@ describe('Database', () => {
     expect(await second.selectSQL('SELECT body FROM entries;', [])).toEqual([{ body: 'kept' }]);
   });
 
+  it('keeps the previous database when replacing its stored bytes fails', async () => {
+    const writer = await open(store);
+    await writer.executeSQL('CREATE TABLE entries (body TEXT);');
+    await writer.runSQL('INSERT INTO entries VALUES (?);', ['last checkpoint'], true, 'no');
+    await writer.saveToStore();
+    await writer.runSQL('INSERT INTO entries VALUES (?);', ['unconfirmed update'], true, 'no');
+
+    vi.spyOn(store, 'setItem').mockRejectedValueOnce(new Error('QuotaExceededError'));
+    await expect(writer.saveToStore()).rejects.toThrow('QuotaExceededError');
+
+    const reader = await open(store);
+    expect(await reader.selectSQL('SELECT body FROM entries;', [])).toEqual([
+      { body: 'last checkpoint' },
+    ]);
+    await reader.close();
+    await writer.close();
+  });
+
   it('saves after every write when autosave is on', async () => {
     const db = await open(store, 1, {}, true);
     await db.executeSQL('CREATE TABLE entries (id INTEGER PRIMARY KEY, body TEXT);');
