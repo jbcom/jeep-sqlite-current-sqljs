@@ -27,7 +27,7 @@ export class UtilsStore {
 
       return Promise.resolve();
     } catch (err) {
-      return Promise.reject(`SetDBToStore: ${err instanceof Error ? err.message : err}`);
+      throw new Error(`SetDBToStore: ${err instanceof Error ? err.message : String(err)}`);
     }
   }
   static async saveDBToStore(dbName: string, data: Uint8Array, store: LocalForage): Promise<void> {
@@ -36,7 +36,7 @@ export class UtilsStore {
       await store.setItem(dbName, data);
       return Promise.resolve();
     } catch (err) {
-      return Promise.reject(`SaveDBToStore: ${err.message}`);
+      throw new Error(`SaveDBToStore: ${err instanceof Error ? err.message : String(err)}`);
     }
   }
   static async removeDBFromStore(dbName: string, store: LocalForage): Promise<void> {
